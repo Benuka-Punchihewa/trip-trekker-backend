@@ -4,7 +4,7 @@ const getDBConfig = () => {
   const DATABASE_NAME = process.env.MONGO_DATABASE_NAME || "";
 
   return {
-    MONGODB_URL: `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.obv9syr.mongodb.net/?${DATABASE_NAME}&retryWrites=true&w=majority`,
+    MONGODB_URL: `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@cluster0.obv9syr.mongodb.net/${DATABASE_NAME}?&retryWrites=true&w=majority`,
   };
 };
 

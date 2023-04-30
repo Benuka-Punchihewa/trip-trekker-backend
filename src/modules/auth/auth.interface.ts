@@ -24,4 +24,15 @@ interface IAuthSession {
   user: IUserModel;
 }
 
-export { IAuth, IAuthModel, IAuthToken, IAuthSession };
+interface ISignUpStrigifiedBody {
+  name: string;
+  birthday: Date;
+  email: string;
+  mobileNumber: string;
+  address: string;
+  password: string;
+  type: string;
+  gender: string;
+}
+
+export { IAuth, IAuthModel, IAuthToken, IAuthSession, ISignUpStrigifiedBody };

@@ -14,6 +14,7 @@ import CommonUtil from "./modules/common/common.util";
 // middleware imports
 
 // route imports
+import AuthRoutes from "./modules/auth/auth.route";
 
 // import errors
 import NotFoundError from "./modules/error/error.classes/NotFoundError";
@@ -37,6 +38,7 @@ app.get(constants.API.PREFIX.concat("/ping"), (req, res, next) => {
 });
 
 // route declarations
+app.use(constants.API.PREFIX.concat("/auth"), AuthRoutes);
 
 // not found route
 app.use((req, res, next) => {

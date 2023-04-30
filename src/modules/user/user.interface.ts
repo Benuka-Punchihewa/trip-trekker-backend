@@ -12,7 +12,7 @@ interface IUser {
   birthday: Date;
   gender: string;
   type: string;
-  tourGuide?: {
+  tourGuide: {
     certificate: IFirebaseFile;
     isVerified: Boolean;
     rating: number;
