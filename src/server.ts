@@ -48,7 +48,8 @@ app.use(ErrorMiddleware.errorHandler);
 
 const start = async () => {
   try {
-    // await CommonUtil.connectDB(config.MONGO_URL);
+    const dbConig = config.getDBConfig();
+    await CommonUtil.connectDB(dbConig.MONGODB_URL);
 
     const port = process.env.SERVER_PORT || constants.SERVER.PORT;
 

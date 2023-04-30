@@ -1,6 +1,6 @@
 export default {
   SERVER: {
-    PORT: 5000,
+    PORT: 4002,
   },
   API: {
     PREFIX: "/api/v1",
