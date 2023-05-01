@@ -1,4 +1,4 @@
-import { ClientSession } from "mongoose";
+import mongoose, { ClientSession } from "mongoose";
 import { IUserModel } from "./user.interface";
 import User from "./user.model";
 
@@ -16,4 +16,12 @@ const findByAuthId = async (authId: string, session?: ClientSession) => {
   return User.findOne({ "auth._id": authId });
 };
 
-export default { save, removeById, findByAuthId };
+const findById = async (
+  id: string | mongoose.Types.ObjectId,
+  session?: ClientSession
+) => {
+  if (session) return User.findById(id).session(session);
+  return User.findById(id);
+};
+
+export default { save, removeById, findByAuthId, findById };
