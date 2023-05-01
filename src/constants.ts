@@ -8,6 +8,7 @@ export default {
   SCHEMAS: {
     AUTH: "Auth",
     USER: "User",
+    ATTRACTION: "Attraction",
   },
   GENDER: {
     MALE: "Male",

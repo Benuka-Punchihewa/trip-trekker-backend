@@ -9,4 +9,9 @@ interface IPagination {
   orderBy: "asc" | "desc";
 }
 
-export { IFirebaseFile, IPagination };
+interface IGeoJSON {
+  type: String;
+  coordinates: Array<number>;
+}
+
+export { IFirebaseFile, IPagination, IGeoJSON };
