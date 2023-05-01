@@ -16,6 +16,7 @@ import CommonUtil from "./modules/common/common.util";
 // route imports
 import AuthRoutes from "./modules/auth/auth.route";
 import AttractionRoutes from "./modules/attraction/attraction.route";
+import PulseStreamDataRoutes from "./modules/pulseStreamData/pulseStreamData.route";
 
 // import errors
 import NotFoundError from "./modules/error/error.classes/NotFoundError";
@@ -41,6 +42,10 @@ app.get(constants.API.PREFIX.concat("/ping"), (req, res, next) => {
 // route declarations
 app.use(constants.API.PREFIX.concat("/auth"), AuthRoutes);
 app.use(constants.API.PREFIX.concat("/attractions"), AttractionRoutes);
+app.use(
+  constants.API.PREFIX.concat("/pulse-stream-data"),
+  PulseStreamDataRoutes
+);
 
 // not found route
 app.use((req, res, next) => {
@@ -64,5 +69,8 @@ const start = async () => {
     console.error(err);
   }
 };
-
+console.log(JSON.stringify({
+  tag: "info",
+  description: "Some Description"
+}))
 start();

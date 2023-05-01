@@ -3,7 +3,7 @@ import constants from "../../constants";
 import { IAttractionModel } from "./attraction.interface";
 import { GeoJsonSchema, FirebaseSchema } from "../common/common.model";
 
-const AuthSchema: Schema<IAttractionModel> = new mongoose.Schema(
+const AttractionSchema: Schema<IAttractionModel> = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -57,5 +57,5 @@ const AuthSchema: Schema<IAttractionModel> = new mongoose.Schema(
 
 export default mongoose.model<IAttractionModel>(
   constants.SCHEMAS.ATTRACTION,
-  AuthSchema
+  AttractionSchema
 );

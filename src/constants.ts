@@ -9,6 +9,7 @@ export default {
     AUTH: "Auth",
     USER: "User",
     ATTRACTION: "Attraction",
+    PULSE_STREAM_DATA: "PulseStreamData",
   },
   GENDER: {
     MALE: "Male",
@@ -18,6 +19,13 @@ export default {
     ADMIN: "Admin",
     TOUR_GUIDE: "Tour Guide",
     TOURIST: "Tourist",
+  },
+  PULSE_STREAM_DATA: {
+    TAGS: {
+      INFO: "Info",
+      WARNING: "Warning",
+      HAZARD: "Hazard",
+    },
   },
   TOKEN_LIFE: 30 * 24 * 60 * 60,
 };
