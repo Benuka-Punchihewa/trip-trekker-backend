@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 import PulseStreamDataService from "./pulseStreamData.service";
 import PulseStreamDataUtil from "./pulseStreamData.util";
 import CommonService from "../common/common.service";
-import { IFirebaseFile } from "../common/common.interface";
+import { IFirebaseFile, IPagination } from "../common/common.interface";
 
 const createPulseRecord = async (req: Request, res: Response) => {
   const { attractionId } = req.params;
@@ -69,4 +69,20 @@ const createPulseRecord = async (req: Request, res: Response) => {
   return res.status(StatusCodes.CREATED).json(dbUpdatedPulseStreamData);
 };
 
-export default { createPulseRecord };
+const getPaginatedPulseStreamData = async (req: Request, res: Response) => {
+  const pageable = req.body.pageable as IPagination;
+  const { attractionId } = req.params;
+
+  // validate attraction
+  const dbAttraction = await AttractionService.findById(attractionId);
+  if (!dbAttraction) throw new NotFoundError("Attraction not found!");
+
+  const result = await PulseStreamDataService.findPulseStreamDataPaginated(
+    dbAttraction._id,
+    pageable
+  );
+
+  return res.status(StatusCodes.OK).json(result);
+};
+
+export default { createPulseRecord, getPaginatedPulseStreamData };
