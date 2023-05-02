@@ -6,7 +6,8 @@ import AttractionService from "./attraction.service";
 import Attraction from "./attraction.model";
 import CommonService from "../common/common.service";
 import AttractionUtil from "./attraction.util";
-import { IFirebaseFile } from "../common/common.interface";
+import { IFirebaseFile, IPagination } from "../common/common.interface";
+import NotFoundError from "../error/error.classes/NotFoundError";
 
 const createAttraction = async (req: Request, res: Response) => {
   const { strigifiedBody } = req.body;
@@ -57,4 +58,25 @@ const createAttraction = async (req: Request, res: Response) => {
   return res.status(StatusCodes.CREATED).json(updatedAttraction);
 };
 
-export default { createAttraction };
+const getPaginatedAttractions = async (req: Request, res: Response) => {
+  const pageable = req.body.pageable as IPagination;
+  const { keyword } = req.query;
+
+  const result = await AttractionService.findPaginatedAttractions(
+    keyword as string,
+    pageable
+  );
+
+  return res.status(StatusCodes.OK).json(result);
+};
+
+const getById = async (req: Request, res: Response) => {
+  const { attractionId } = req.params;
+
+  const dbAttraction = await AttractionService.findById(attractionId);
+  if (!dbAttraction) throw new NotFoundError("Attraction not found!");
+
+  return res.status(StatusCodes.OK).json(dbAttraction);
+};
+
+export default { createAttraction, getPaginatedAttractions, getById };

@@ -14,4 +14,12 @@ router.post(
   AttractionController.createAttraction
 );
 
+router.get(
+  "/",
+  CommonMiddleware.paginate,
+  AttractionController.getPaginatedAttractions
+);
+
+router.get("/:attractionId", AttractionController.getById);
+
 export default router;
