@@ -11,6 +11,7 @@ export default {
     ATTRACTION: "Attraction",
     HOTEL:'Hotel',
     PULSE_STREAM_DATA: "PulseStreamData",
+    RATING: "Rating",
   },
   GENDER: {
     MALE: "Male",
@@ -26,6 +27,13 @@ export default {
       INFO: "Info",
       WARNING: "Warning",
       HAZARD: "Hazard",
+    },
+  },
+  RATINGS: {
+    RATEES: {
+      HOTEL: "Hotel",
+      ATTRACTION: "Attraction",
+      TOUR_GUIDE: "Tour Guide",
     },
   },
   TOKEN_LIFE: 30 * 24 * 60 * 60,
