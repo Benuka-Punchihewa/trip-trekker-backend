@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import constants from "../../constants.js";
-import { FirebaseSchema } from "../common/common.model.js";
+import { GeoJsonSchema, FirebaseSchema } from "../common/common.model.js";
 
 const HotelSchema = new mongoose.Schema(
   {
@@ -12,7 +12,7 @@ const HotelSchema = new mongoose.Schema(
     },
     registrationNumber: {
       type: String,
-       maxlength: [50, "Hotel name should not exceed 50 characters!"],
+      maxlength: [50, "Hotel name should not exceed 50 characters!"],
       required: [true, "Hotel registration number is required!"],
       unique: true,
     },
@@ -21,15 +21,12 @@ const HotelSchema = new mongoose.Schema(
       maxlength: [150, "Hotel address should not exceed 150 characters!"],
       required: [true, "Hotel address is required!"],
     },
-     contactNumber: {
+    contactNumber: {
       type: String,
-      maxlength: [
-        20,
-        "Hotel contact number should not exceed 20 characters!",
-      ],
+      maxlength: [20, "Hotel contact number should not exceed 20 characters!"],
       required: [true, "Hotel contact number is required!"],
     },
-     email: {
+    email: {
       type: String,
       unique: true,
       maxlength: [50, "Email should not exceed 50 characters!"],

@@ -19,7 +19,7 @@ const RatingSchema = new mongoose.Schema(
       hotel: {
         _id: {
           type: Schema.Types.ObjectId,
-          // TODO: ref: constants.SCHEMAS.HOTEL
+          ref: constants.SCHEMAS.HOTEL,
         },
       },
       attraction: {

@@ -1,4 +1,4 @@
-import Hotel from "./hotel.model";
+import Hotel from "./hotel.model.js";
 
 const save = async (hotel, session) => {
   return hotel.save({ session });
