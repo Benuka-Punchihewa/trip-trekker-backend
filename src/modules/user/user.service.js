@@ -1,3 +1,4 @@
+import constants from "../../constants.js";
 import User from "./user.model.js";
 
 const save = async (user, session) => {
@@ -19,4 +20,51 @@ const findById = async (id, session) => {
   return User.findById(id);
 };
 
-export default { save, removeById, findByAuthId, findById };
+const findPaginatedTourGuides = async (keyword = "", pageableObj) => {
+  const pipeline = [];
+
+  if (!keyword) keyword = "";
+  const queryObj = {
+    name: { $regex: keyword, $options: "i" },
+    type: constants.USER_TYPES.TOUR_GUIDE,
+  };
+
+  pipeline.push({
+    $match: queryObj,
+  });
+
+  pipeline.push({
+    $sort: {
+      _id: pageableObj.orderBy === "asc" ? 1 : -1,
+    },
+  });
+
+  pipeline.push({
+    $facet: {
+      metadata: [{ $count: "totalElements" }],
+      data: [
+        { $skip: (pageableObj.page - 1) * pageableObj.limit },
+        { $limit: pageableObj.limit },
+      ],
+    },
+  });
+
+  const result = await User.aggregate(pipeline);
+
+  const content = result[0].data;
+  const totalElements = result[0]?.metadata[0]?.totalElements || 0;
+
+  return {
+    content,
+    totalElements,
+    totalPages: Math.ceil(totalElements / pageableObj.limit),
+  };
+};
+
+export default {
+  save,
+  removeById,
+  findByAuthId,
+  findById,
+  findPaginatedTourGuides,
+};

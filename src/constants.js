@@ -10,6 +10,7 @@ export default {
     USER: "User",
     ATTRACTION: "Attraction",
     PULSE_STREAM_DATA: "PulseStreamData",
+    GUIDE_PORTFOLIO: "GuidePortfolio",
   },
   GENDER: {
     MALE: "Male",
