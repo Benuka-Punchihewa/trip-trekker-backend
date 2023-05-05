@@ -9,6 +9,7 @@ export default {
     AUTH: "Auth",
     USER: "User",
     ATTRACTION: "Attraction",
+    HOTEL:'Hotel',
     PULSE_STREAM_DATA: "PulseStreamData",
     RATING: "Rating",
   },
