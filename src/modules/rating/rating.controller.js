@@ -4,7 +4,6 @@ import NotFoundError from "../error/error.classes/NotFoundError.js";
 import Rating from "./rating.model.js";
 import constants from "../../constants.js";
 import RatingService from "./rating.service.js";
-import UserService from "../user/user.service.js";
 
 const rateAttraction = async (req, res) => {
   const { attractionId } = req.params;

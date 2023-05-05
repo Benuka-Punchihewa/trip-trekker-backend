@@ -39,15 +39,13 @@ const findByIdAndDelete = async (_id, session) => {
 const findPaginatedRatings = async (data, pageableObj) => {
   const pipeline = [];
 
-  const queryObj = {
-    type: data.type,
-  };
+  const queryObj = {};
 
   if (data.type === constants.RATINGS.RATEES.HOTEL)
-    queryObj["hotel._id"] = data.hotelId;
+    queryObj["ratee.hotel._id"] = data.hotelId;
   else if (data.type === constants.RATINGS.RATEES.ATTRACTION)
-    queryObj["hotel._id"] = data.attractionId;
-  else queryObj["user._id"] = data.tourGuideId;
+    queryObj["ratee.attraction._id"] = data.attractionId;
+  else queryObj["ratee.user._id"] = data.tourGuideId;
 
   pipeline.push({
     $match: queryObj,

@@ -1,6 +1,7 @@
 import express from "express";
 import RatingController from "./rating.controller.js";
 import AuthMiddleware from "../auth/auth.middleware.js";
+import commonMiddleware from "../common/common.middleware.js";
 
 const router = express.Router();
 
@@ -20,6 +21,13 @@ router.delete(
   "/:ratingId",
   AuthMiddleware.authorize,
   RatingController.deleteRating
+);
+
+router.get(
+  "/attractions/:attractionId",
+  commonMiddleware.paginate,
+  AuthMiddleware.authorize,
+  RatingController.getPaginatedAttractionRatings
 );
 
 export default router;
