@@ -4,6 +4,7 @@ import NotFoundError from "../error/error.classes/NotFoundError.js";
 import Rating from "./rating.model.js";
 import constants from "../../constants.js";
 import RatingService from "./rating.service.js";
+import UserService from "../user/user.service.js";
 
 const rateAttraction = async (req, res) => {
   const { attractionId } = req.params;
@@ -59,4 +60,27 @@ const deleteRating = async (req, res) => {
   return res.status(StatusCodes.OK).json(dbRating);
 };
 
-export default { rateAttraction, updateRating, deleteRating };
+const getPaginatedAttractionRatings = async (req, res) => {
+  const { attractionId } = req.params;
+  const pageable = req.body.pageable;
+
+  const dbAttraction = await AttractionService.findById(attractionId);
+  if (!dbAttraction) throw new NotFoundError("Attraction not found!");
+
+  const result = await RatingService.findPaginatedRatings(
+    {
+      type: constants.RATINGS.RATEES.ATTRACTION,
+      attractionId: dbAttraction._id,
+    },
+    pageable
+  );
+
+  return res.status(StatusCodes.OK).json(result);
+};
+
+export default {
+  rateAttraction,
+  updateRating,
+  deleteRating,
+  getPaginatedAttractionRatings,
+};
