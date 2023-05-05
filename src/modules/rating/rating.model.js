@@ -16,7 +16,6 @@ const RatingSchema = new mongoose.Schema(
           message: "Invalid ratee type!",
         },
       },
-
       hotel: {
         _id: {
           type: Schema.Types.ObjectId,
@@ -72,4 +71,3 @@ const RatingSchema = new mongoose.Schema(
 );
 
 export default mongoose.model(constants.SCHEMAS.RATING, RatingSchema);
-0;

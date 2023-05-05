@@ -17,6 +17,7 @@ import CommonUtil from "./modules/common/common.util.js";
 import AuthRoutes from "./modules/auth/auth.route.js";
 import AttractionRoutes from "./modules/attraction/attraction.route.js";
 import PulseStreamDataRoutes from "./modules/pulseStreamData/pulseStreamData.route.js";
+import RatingRoutes from "./modules/rating/rating.route.js";
 
 // import errors
 import NotFoundError from "./modules/error/error.classes/NotFoundError.js";
@@ -46,6 +47,7 @@ app.use(
   constants.API.PREFIX.concat("/pulse-stream-data"),
   PulseStreamDataRoutes
 );
+app.use(constants.API.PREFIX.concat("/ratings"), RatingRoutes);
 
 // not found route
 app.use((req, res, next) => {
