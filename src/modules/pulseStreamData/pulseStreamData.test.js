@@ -232,4 +232,74 @@ describe("Pulse Stream Data Module Tests", () => {
         });
     });
   });
+
+  describe("Delete Pulse Stream Data Tests", () => {
+    it("API: DELETE /pulse-stream-data/6456a956522b62b558c5a603 --> Should return Unauthorized Error when attempted without auth tokens", async () => {
+      await agent
+        .delete("/api/v1/pulse-stream-data/6456a956522b62b558c5a603")
+        .expect("Content-Type", /json/)
+        .expect(StatusCodes.UNAUTHORIZED);
+    });
+
+    it("API: DELETE /pulse-stream-data/6456a956522b62b558c5a603 --> Should return Not Found Error when pulse stream data doesn't exist", async () => {
+      const token = await AuthTestUtil.getAuthTokenByUserType(
+        constants.USER_TYPES.ADMIN
+      );
+      await agent
+        .delete("/api/v1/pulse-stream-data/6456b0e014973ed0818cf807")
+        .set("Authorization", `Bearer ${token}`)
+        .expect("Content-Type", /json/)
+        .expect(StatusCodes.NOT_FOUND);
+    });
+
+    it("API: DELETE /pulse-stream-data/6456a956522b62b558c5a603 --> Should return Forbidden Error when an unauthorized user attempts", async () => {
+      const token = await AuthTestUtil.getAuthTokenByUserType(
+        constants.USER_TYPES.TOUR_GUIDE,
+        1
+      );
+
+      await agent
+        .delete("/api/v1/pulse-stream-data/6456a956522b62b558c5a603")
+        .set("Authorization", `Bearer ${token}`)
+        .expect("Content-Type", /json/)
+        .expect(StatusCodes.FORBIDDEN);
+    });
+
+    it("API: DELETE /pulse-stream-data/6456a956522b62b558c5a603 --> Should return status OK on success", async () => {
+      const token = await AuthTestUtil.getAuthTokenByUserType(
+        constants.USER_TYPES.ADMIN
+      );
+      await agent
+        .delete("/api/v1/pulse-stream-data/6456a956522b62b558c5a603")
+        .set("Authorization", `Bearer ${token}`)
+        .expect("Content-Type", /json/)
+        .expect(StatusCodes.OK)
+        .then((response) => {
+          const body = response.body;
+          expect(body).toBeTruthy();
+        });
+    });
+  });
+
+  describe("Get Paginated Pulse Stream Data Tests", () => {
+    it("API: GET /pulse-stream-data/attractions/645691012a51fd1abe171360 --> Should return Not Found Error when attraction doesnt exist", async () => {
+      await agent
+        .get("/api/v1/pulse-stream-data/attractions/64500171bddd30a906652044")
+        .expect("Content-Type", /json/)
+        .expect(StatusCodes.NOT_FOUND);
+    });
+
+    it("API: GET /pulse-stream-data/attractions/645691012a51fd1abe171360 --> Should return status OK when successful", async () => {
+      await agent
+        .get("/api/v1/pulse-stream-data/attractions/645691012a51fd1abe171360")
+        .expect("Content-Type", /json/)
+        .expect(StatusCodes.OK)
+        .then((response) => {
+          const body = response.body;
+          expect(Array.isArray(body.content)).toBe(true);
+          expect(typeof body.totalElements).toBe("number");
+          expect(typeof body.totalPages).toBe("number");
+        });
+    });
+  });
 });
