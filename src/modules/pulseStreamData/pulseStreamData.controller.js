@@ -82,8 +82,8 @@ const updatePulseStreamData = async (req, res) => {
     throw new NotFoundError("Pulse stream data record not found!");
 
   if (
-    dbPulseStreamData.user._id.toString() !== auth.user._id.toString() ||
-    auth.user.type === constants.USER_TYPES.ADMIN
+    dbPulseStreamData.user._id.toString() !== auth.user._id.toString() &&
+    auth.user.type !== constants.USER_TYPES.ADMIN
   )
     throw new ForbidderError("You're not authorized to access this resource!");
 
@@ -99,7 +99,8 @@ const updatePulseStreamData = async (req, res) => {
   if (!parsedBody) throw new BadRequestError("Request body is undefined!");
 
   // update image
-  if (req.file) {
+  const file = req.file;
+  if (file) {
     const path = dbPulseStreamData.image.firebaseStorageRef;
     // upload image to firebase
     await CommonService.uploadToFirebase(file, path);
@@ -136,7 +137,7 @@ const deletePulseStreamData = async (req, res) => {
   if (!dbPulseStreamData)
     throw new NotFoundError("Pulse stream data record not found!");
   if (
-    dbPulseStreamData.user._id.toString() !== auth.user._id.toString() ||
+    dbPulseStreamData.user._id.toString() !== auth.user._id.toString() &&
     auth.user.type !== constants.USER_TYPES.ADMIN
   )
     throw new ForbidderError("You're not authorized to access this resource!");
