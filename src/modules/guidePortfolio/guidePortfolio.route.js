@@ -14,4 +14,26 @@ router.post(
   PortfolioController.createPortfolioRecord
 );
 
+router.patch(
+  "/:portfolioId",
+  CommonMiddleware.uploader.single("file"),
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([constants.USER_TYPES.TOUR_GUIDE]),
+  PortfolioController.updatePortfolioRecord
+);
+
+//get paginated portfolios
+router.get(
+  "/tour-guides/:userId",
+  CommonMiddleware.paginate,
+  PortfolioController.getPaginatedPortfolios
+);
+
+router.delete(
+  "/:portfolioId",
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([constants.USER_TYPES.TOUR_GUIDE]),
+  PortfolioController.deletePortfolio
+);
+
 export default router;

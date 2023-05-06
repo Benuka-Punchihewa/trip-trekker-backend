@@ -10,4 +10,10 @@ const getPaginatedTourGuide = async (req, res) => {
   return res.status(StatusCodes.OK).json(result);
 };
 
-export default { getPaginatedTourGuide };
+const findById = async (req, res) => {
+  const { userId } = req.params;
+  const dbUser = await userService.findById(userId);
+  return res.status(StatusCodes.OK).json(dbUser);
+};
+
+export default { getPaginatedTourGuide, findById };
