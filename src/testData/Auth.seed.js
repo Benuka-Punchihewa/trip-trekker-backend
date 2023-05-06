@@ -13,4 +13,4 @@ const auths = [
   },
 ];
 
-export default auths;
+module.exports = auths;

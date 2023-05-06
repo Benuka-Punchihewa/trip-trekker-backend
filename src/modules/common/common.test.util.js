@@ -33,7 +33,8 @@ const dropAllCollections = async () => {
 
 const seedDatabase = async () => {
   const readDir = util.promisify(fs.readdir).bind(fs);
-  const fPath = path.join(__dirname, "..", "testData");
+  const fPath = path.join(__dirname, "..", "..", "testData");
+  console.log(__dirname);
   const dir = await readDir(fPath);
   const seedFiles = dir.filter((f) => f.endsWith(".seed.js"));
 
@@ -43,6 +44,7 @@ const seedDatabase = async () => {
 
     if (!model) throw new Error(`Cannot Find Model '${modelName}'`);
     const fileContents = require(path.join(fPath, file));
+    console.log(fileContents);
 
     await model.create(fileContents);
   }

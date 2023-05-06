@@ -130,3 +130,6 @@ dist
 # Typescript build
 app.zip
 app/
+
+# Others
+testAttachments/

@@ -76,4 +76,6 @@ const start = async () => {
   }
 };
 
-start();
+if (process.env.ENVIRONMENT !== "TEST") start();
+
+export default app;
