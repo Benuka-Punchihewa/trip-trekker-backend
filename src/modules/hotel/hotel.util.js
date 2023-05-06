@@ -1,8 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 
-const getFirebasePathForAttractionImageUploads = (hotelId) => {
+const getFirebasePathForHotelImageUploads = (hotelId) => {
   const imageId = uuidv4();
   return `hotels/${hotelId}/${imageId}`;
 };
 
-export default { getFirebasePathForAttractionImageUploads };
+const getFirebaseRootPathForHotelImageUploads = (hotelId) => {
+  return `hotels/${hotelId}`;
+}; 
+export default { getFirebasePathForHotelImageUploads,getFirebaseRootPathForHotelImageUploads };

@@ -52,4 +52,10 @@ const findPaginatedHotels = async (
   };
 };
 
-export default { save, findById, findPaginatedHotels };
+const deleteById = async (id) => {
+  const deletedHotel = await Hotel.findByIdAndDelete(id);
+  if (!deletedHotel) throw new NotFoundError("Hotel not found!");
+  return deletedHotel;
+};
+
+export default { save, findById, findPaginatedHotels,deleteById };

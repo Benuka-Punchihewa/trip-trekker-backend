@@ -19,7 +19,23 @@ router.get(
   CommonMiddleware.paginate,
   HotelController.getPaginatedHotels
 );
-
 router.get("/:hotelId", HotelController.getById);
 
+//Update Hotel
+router.patch(
+  "/:hotelId",
+  CommonMiddleware.uploader.array("files", 10),
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([constants.USER_TYPES.ADMIN]),
+  HotelController.updateHotel
+);
+
+//Delete Hotel
+router.delete(
+  "/:hotelId",
+  CommonMiddleware.uploader.array("files", 10),
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([constants.USER_TYPES.ADMIN]),
+  HotelController.deleteHotel
+)
 export default router;
