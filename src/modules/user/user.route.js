@@ -10,4 +10,6 @@ router.get(
   userController.getPaginatedTourGuide
 );
 
+router.get("/:userId", userController.findById);
+
 export default router;
