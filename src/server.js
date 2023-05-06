@@ -20,6 +20,7 @@ import PulseStreamDataRoutes from "./modules/pulseStreamData/pulseStreamData.rou
 import GuidePortfolioRoute from "./modules/guidePortfolio/guidePortfolio.route.js";
 import TourGuideRoute from "./modules/user/user.route.js";
 import RatingRoutes from "./modules/rating/rating.route.js";
+import HotelRoute from './modules/hotel/hotel.route.js'
 
 // import errors
 import NotFoundError from "./modules/error/error.classes/NotFoundError.js";
@@ -52,6 +53,7 @@ app.use(
 app.use(constants.API.PREFIX.concat("/guide-portfolios"), GuidePortfolioRoute);
 app.use(constants.API.PREFIX.concat("/users"), TourGuideRoute);
 app.use(constants.API.PREFIX.concat("/ratings"), RatingRoutes);
+app.use(constants.API.PREFIX.concat('/hotels'), HotelRoute);
 
 // not found route
 app.use((req, res, next) => {
