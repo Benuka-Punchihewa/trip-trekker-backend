@@ -17,6 +17,8 @@ import CommonUtil from "./modules/common/common.util.js";
 import AuthRoutes from "./modules/auth/auth.route.js";
 import AttractionRoutes from "./modules/attraction/attraction.route.js";
 import PulseStreamDataRoutes from "./modules/pulseStreamData/pulseStreamData.route.js";
+import GuidePortfolioRoute from "./modules/guidePortfolio/guidePortfolio.route.js";
+import TourGuideRoute from "./modules/user/user.route.js";
 import RatingRoutes from "./modules/rating/rating.route.js";
 import HotelRoute from './modules/hotel/hotel.route.js'
 
@@ -48,6 +50,8 @@ app.use(
   constants.API.PREFIX.concat("/pulse-stream-data"),
   PulseStreamDataRoutes
 );
+app.use(constants.API.PREFIX.concat("/guide-portfolios"), GuidePortfolioRoute);
+app.use(constants.API.PREFIX.concat("/tour-guides"), TourGuideRoute);
 app.use(constants.API.PREFIX.concat("/ratings"), RatingRoutes);
 app.use(constants.API.PREFIX.concat('/hotels'), HotelRoute);
 
@@ -74,4 +78,6 @@ const start = async () => {
   }
 };
 
-start();
+if (process.env.ENVIRONMENT !== "TEST") start();
+
+export default app;

@@ -1,19 +1,25 @@
-import PulseStreamData from "./pulseStreamData.model.js";
+import guidePortfolioModel from "./guidePortfolio.model.js";
 
-const save = async (pulseStreamData, session) => {
-  return pulseStreamData.save({ session });
+const save = async (portfolioData, session) => {
+  return portfolioData.save({ session });
 };
 
 const findById = async (id, session) => {
-  if (session) return PulseStreamData.findById(id).session(session);
-  return PulseStreamData.findById(id);
+  if (session) return guidePortfolioModel.findById(id).session(session);
+  return guidePortfolioModel.findById(id);
 };
 
-const findPulseStreamDataPaginated = async (attractionId, pageableObj) => {
+const deleteOne = async (queryObj) => {
+  return guidePortfolioModel.findOneAndDelete(queryObj);
+};
+
+const findPaginatedPortfolios = async (pageableObj, userId) => {
   const pipeline = [];
 
   const queryObj = {
-    "attraction._id": attractionId,
+    user: {
+      _id: userId,
+    },
   };
 
   pipeline.push({
@@ -36,7 +42,7 @@ const findPulseStreamDataPaginated = async (attractionId, pageableObj) => {
     },
   });
 
-  const result = await PulseStreamData.aggregate(pipeline);
+  const result = await guidePortfolioModel.aggregate(pipeline);
 
   const content = result[0].data;
   const totalElements = result[0]?.metadata[0]?.totalElements || 0;
@@ -48,9 +54,4 @@ const findPulseStreamDataPaginated = async (attractionId, pageableObj) => {
   };
 };
 
-const deleteById = async (_id, session) => {
-  if (session) return PulseStreamData.deleteOne({ _id }).session(session);
-  return PulseStreamData.deleteOne({ _id });
-};
-
-export default { save, findById, findPulseStreamDataPaginated, deleteById };
+export default { save, findById, deleteOne, findPaginatedPortfolios };

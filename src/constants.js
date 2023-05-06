@@ -11,6 +11,7 @@ export default {
     ATTRACTION: "Attraction",
     HOTEL:'Hotel',
     PULSE_STREAM_DATA: "PulseStreamData",
+    GUIDE_PORTFOLIO: "GuidePortfolio",
     RATING: "Rating",
   },
   GENDER: {
