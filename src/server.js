@@ -50,7 +50,7 @@ app.use(
   PulseStreamDataRoutes
 );
 app.use(constants.API.PREFIX.concat("/guide-portfolios"), GuidePortfolioRoute);
-app.use(constants.API.PREFIX.concat("/tour-guides"), TourGuideRoute);
+app.use(constants.API.PREFIX.concat("/users"), TourGuideRoute);
 app.use(constants.API.PREFIX.concat("/ratings"), RatingRoutes);
 
 // not found route
