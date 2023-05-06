@@ -44,7 +44,6 @@ const seedDatabase = async () => {
 
     if (!model) throw new Error(`Cannot Find Model '${modelName}'`);
     const fileContents = require(path.join(fPath, file));
-    console.log(fileContents);
 
     await model.create(fileContents);
   }
