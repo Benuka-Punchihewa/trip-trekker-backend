@@ -23,4 +23,25 @@ router.get(
   PulseStreamDataController.getPaginatedPulseStreamData
 );
 
+router.patch(
+  "/:pulseStreamDataId",
+  CommonMiddleware.uploader.single("file"),
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([
+    constants.USER_TYPES.ADMIN,
+    constants.USER_TYPES.TOUR_GUIDE,
+  ]),
+  PulseStreamDataController.updatePulseStreamData
+);
+
+router.delete(
+  "/:pulseStreamDataId",
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([
+    constants.USER_TYPES.ADMIN,
+    constants.USER_TYPES.TOUR_GUIDE,
+  ]),
+  PulseStreamDataController.deletePulseStreamData
+);
+
 export default router;

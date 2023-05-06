@@ -4,6 +4,11 @@ const save = async (pulseStreamData, session) => {
   return pulseStreamData.save({ session });
 };
 
+const findById = async (id, session) => {
+  if (session) return PulseStreamData.findById(id).session(session);
+  return PulseStreamData.findById(id);
+};
+
 const findPulseStreamDataPaginated = async (attractionId, pageableObj) => {
   const pipeline = [];
 
@@ -43,4 +48,9 @@ const findPulseStreamDataPaginated = async (attractionId, pageableObj) => {
   };
 };
 
-export default { save, findPulseStreamDataPaginated };
+const deleteById = async (_id, session) => {
+  if (session) return PulseStreamData.deleteOne({ _id }).session(session);
+  return PulseStreamData.deleteOne({ _id });
+};
+
+export default { save, findById, findPulseStreamDataPaginated, deleteById };
