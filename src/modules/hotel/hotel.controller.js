@@ -121,7 +121,7 @@ const updateHotel = async (req, res) => {
 
   // // resolve firebase upload promises
   // await Promise.all(promises);
-  // const savedHotel = await HotelService.save(updatedHotel);
+  const savedHotel = await HotelService.save(updatedHotel);
 
   return res.status(StatusCodes.OK).json(savedHotel);
 };
