@@ -225,9 +225,11 @@ describe("Guide Portfolio Module Tests", () => {
         .expect(StatusCodes.NOT_FOUND);
     });
 
-    it("API: GET /guide-portfolios/tour-guides/6455e0211fe8fa83ebbfabe2 --> Should return status OK when successful", async () => {
+    it("API: GET /guide-portfolios/tour-guides/6455e0211fe8fa83ebbfabe2?page=1&limit=10&orderBy=desc --> Should return status OK when successful", async () => {
       await agent
-        .get("/guide-portfolios/tour-guides/6455e0211fe8fa83ebbfabe2")
+        .get(
+          "/guide-portfolios/tour-guides/6455e0211fe8fa83ebbfabe2?page=1&limit=10&orderBy=desc"
+        )
         .expect("Content-Type", /json/)
         .expect(StatusCodes.OK)
         .then((response) => {
