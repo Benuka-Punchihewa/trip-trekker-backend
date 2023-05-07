@@ -139,7 +139,7 @@ const deleteHotel = async (req, res) => {
   const path = HotelUtill.getFirebaseRootPathForHotelImageUploads(hotelId);
   await CommonService.deleteFromFirebase(path)
  
-  return res.status(StatusCodes.OK).send();
+  return res.status(StatusCodes.OK).json();
 };
 
 export default { createHotel, getPaginatedHotels, getById ,updateHotel,deleteHotel};

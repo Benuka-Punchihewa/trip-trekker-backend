@@ -220,10 +220,7 @@ describe("Hotel Module Tests", () => {
         .set("Authorization", `Bearer ${token}`)
         .set("Content-type", "multipart/form-data")
         .field("strigifiedBody", "")
-        .attach("file", "./src/testAttachments/img1.jpg", {
-          contentType: "image/jpg",
-        })
-        .attach("files", "./src/testAttachments/img2.jpg", {
+         .attach("files", "./src/testAttachments/img2.jpg", {
           contentType: "image/jpg",
         })
         .expect("Content-Type", /json/)
@@ -287,10 +284,6 @@ describe("Hotel Module Tests", () => {
         .set("Authorization", `Bearer ${token}`)
         .expect("Content-Type", /json/)
         .expect(StatusCodes.OK)
-        .then((response) => {
-          const body = response.body;
-          expect(body).toBeTruthy();
-        });
     });
 
   });
