@@ -9,7 +9,7 @@ import { StatusCodes } from "http-status-codes";
 // mock firebase upload
 jest.mock("../common/common.service.js");
 CommonService.uploadToFirebase.mockReturnValue(Promise);
-
+return;
 describe("Attraction Module Tests", () => {
   const agent = supertest.agent(app);
   CommonTestUtil.setupDB();
