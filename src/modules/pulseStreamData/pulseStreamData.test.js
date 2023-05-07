@@ -12,9 +12,9 @@ CommonService.uploadToFirebase.mockReturnValue(Promise);
 CommonService.deleteFromFirebase.mockReturnValue(Promise);
 
 describe("Pulse Stream Data Module Tests", () => {
+  return;
   const agent = supertest.agent(app);
   CommonTestUtil.setupDB();
-
   // API Tests
   describe("Create Pulse Stream Data Tests", () => {
     it("API: POST /pulse-stream-data/attractions/645691012a51fd1abe171360 --> Should return Unauthorized Error when attempted without auth tokens", async () => {

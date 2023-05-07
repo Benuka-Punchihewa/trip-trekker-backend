@@ -228,7 +228,7 @@ describe("Guide Portfolio Module Tests", () => {
     it("API: GET /guide-portfolios/tour-guides/6455e0211fe8fa83ebbfabe2?page=1&limit=10&orderBy=desc --> Should return status OK when successful", async () => {
       await agent
         .get(
-          "/guide-portfolios/tour-guides/6455e0211fe8fa83ebbfabe2?page=1&limit=10&orderBy=desc"
+          "/api/v1/guide-portfolios/tour-guides/6455e0211fe8fa83ebbfabe2?page=1&limit=10&orderBy=desc"
         )
         .expect("Content-Type", /json/)
         .expect(StatusCodes.OK)
