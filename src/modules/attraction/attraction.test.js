@@ -11,7 +11,6 @@ jest.mock("../common/common.service.js");
 CommonService.uploadToFirebase.mockReturnValue(Promise);
 
 describe("Attraction Module Tests", () => {
-  return;
   const agent = supertest.agent(app);
   CommonTestUtil.setupDB();
 
