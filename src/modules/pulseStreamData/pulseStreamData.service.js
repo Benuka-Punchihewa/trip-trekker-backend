@@ -22,7 +22,7 @@ const findPulseStreamDataPaginated = async (attractionId, pageableObj) => {
 
   pipeline.push({
     $sort: {
-      _id: pageableObj.orderBy === "asc" ? 1 : -1,
+      updatedAt: pageableObj.orderBy === "asc" ? 1 : -1,
     },
   });
 
