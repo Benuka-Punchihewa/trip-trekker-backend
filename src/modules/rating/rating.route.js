@@ -26,7 +26,6 @@ router.delete(
 router.get(
   "/attractions/:attractionId",
   commonMiddleware.paginate,
-  AuthMiddleware.authorize,
   RatingController.getPaginatedAttractionRatings
 );
 
