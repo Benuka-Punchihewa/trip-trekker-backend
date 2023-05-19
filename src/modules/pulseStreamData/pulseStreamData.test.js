@@ -282,16 +282,20 @@ describe("Pulse Stream Data Module Tests", () => {
   });
 
   describe("Get Paginated Pulse Stream Data Tests", () => {
-    it("API: GET /pulse-stream-data/attractions/645691012a51fd1abe171360 --> Should return Not Found Error when attraction doesnt exist", async () => {
+    it("API: GET /pulse-stream-data/attractions/645691012a51fd1abe171360?page=1&limit=10&orderBy=desc --> Should return Not Found Error when attraction doesnt exist", async () => {
       await agent
-        .get("/api/v1/pulse-stream-data/attractions/64500171bddd30a906652044")
+        .get(
+          "/api/v1/pulse-stream-data/attractions/64500171bddd30a906652044?page=1&limit=10&orderBy=desc"
+        )
         .expect("Content-Type", /json/)
         .expect(StatusCodes.NOT_FOUND);
     });
 
-    it("API: GET /pulse-stream-data/attractions/645691012a51fd1abe171360 --> Should return status OK when successful", async () => {
+    it("API: GET /pulse-stream-data/attractions/645691012a51fd1abe171360?page=1&limit=10&orderBy=desc --> Should return status OK when successful", async () => {
       await agent
-        .get("/api/v1/pulse-stream-data/attractions/645691012a51fd1abe171360")
+        .get(
+          "/api/v1/pulse-stream-data/attractions/645691012a51fd1abe171360?page=1&limit=10&orderBy=desc"
+        )
         .expect("Content-Type", /json/)
         .expect(StatusCodes.OK)
         .then((response) => {

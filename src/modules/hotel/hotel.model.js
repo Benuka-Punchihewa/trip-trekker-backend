@@ -58,6 +58,7 @@ const HotelSchema = new mongoose.Schema(
     location: {
       type: GeoJsonSchema,
       required: [true, "Location is required!"],
+      index: { type: "2dsphere", sparse: false },
     },
     images: {
       type: [FirebaseSchema],

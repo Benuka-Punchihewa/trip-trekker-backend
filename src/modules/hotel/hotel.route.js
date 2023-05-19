@@ -14,11 +14,7 @@ router.post(
   HotelController.createHotel
 );
 
-router.get(
-  "/",
-  CommonMiddleware.paginate,
-  HotelController.getPaginatedHotels
-);
+router.get("/", CommonMiddleware.paginate, HotelController.getPaginatedHotels);
 router.get("/:hotelId", HotelController.getById);
 
 //Update Hotel
@@ -37,5 +33,9 @@ router.delete(
   AuthMiddleware.authorize,
   AuthMiddleware.authorizeByRoles([constants.USER_TYPES.ADMIN]),
   HotelController.deleteHotel
-)
+);
+
+// get nearest hotels
+router.get("/nearest/locations", HotelController.getNearbyHotels);
+
 export default router;

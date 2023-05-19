@@ -9,10 +9,7 @@ const findById = async (id, session) => {
   return Attraction.findById(id);
 };
 
-const findPaginatedAttractions = async (
-  keyword = "",
-  pageableObj
-) => {
+const findPaginatedAttractions = async (keyword = "", pageableObj) => {
   const pipeline = [];
 
   if (!keyword) keyword = "";
@@ -52,4 +49,27 @@ const findPaginatedAttractions = async (
   };
 };
 
-export default { save, findById, findPaginatedAttractions };
+const findNearestAttractions = (lat, lng, limit) => {
+  const pipeline = [];
+
+  pipeline.push({
+    $geoNear: {
+      near: { type: "Point", coordinates: [lng, lat] },
+      spherical: true,
+      distanceField: "distance",
+    },
+  });
+
+  pipeline.push({
+    $limit: limit,
+  });
+
+  return Attraction.aggregate(pipeline);
+};
+
+export default {
+  save,
+  findById,
+  findPaginatedAttractions,
+  findNearestAttractions,
+};
