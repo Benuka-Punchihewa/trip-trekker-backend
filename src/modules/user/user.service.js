@@ -20,7 +20,7 @@ const findById = async (id, session) => {
   return User.findById(id);
 };
 
-const findPaginatedTourGuides = async (keyword = "", pageableObj) => {
+const findPaginatedTourGuides = async (keyword = "", isAdmin, pageableObj) => {
   const pipeline = [];
 
   if (!keyword) keyword = "";
@@ -28,6 +28,8 @@ const findPaginatedTourGuides = async (keyword = "", pageableObj) => {
     name: { $regex: keyword, $options: "i" },
     type: constants.USER_TYPES.TOUR_GUIDE,
   };
+
+  if (!isAdmin) queryObj["tourGuide.isVerified"] = true;
 
   pipeline.push({
     $match: queryObj,
@@ -60,8 +62,6 @@ const findPaginatedTourGuides = async (keyword = "", pageableObj) => {
     totalPages: Math.ceil(totalElements / pageableObj.limit),
   };
 };
-
-
 
 export default {
   save,
