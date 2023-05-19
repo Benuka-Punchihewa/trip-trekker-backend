@@ -94,6 +94,7 @@ const getNearbyAttractions = async (req, res) => {
 
   return res.status(StatusCodes.OK).json(result);
 };
+
 export default {
   createAttraction,
   getPaginatedAttractions,

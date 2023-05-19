@@ -9,10 +9,7 @@ const findById = async (id, session) => {
   return Hotel.findById(id);
 };
 
-const findPaginatedHotels = async (
-  keyword = "",
-  pageableObj
-) => {
+const findPaginatedHotels = async (keyword = "", pageableObj) => {
   const pipeline = [];
 
   if (!keyword) keyword = "";
@@ -58,4 +55,28 @@ const deleteById = async (id) => {
   return deletedHotel;
 };
 
-export default { save, findById, findPaginatedHotels,deleteById };
+const findNearestHotels = (lat, lng, limit) => {
+  const pipeline = [];
+
+  pipeline.push({
+    $geoNear: {
+      near: { type: "Point", coordinates: [lng, lat] },
+      spherical: true,
+      distanceField: "distance",
+    },
+  });
+
+  pipeline.push({
+    $limit: limit,
+  });
+
+  return Hotel.aggregate(pipeline);
+};
+
+export default {
+  save,
+  findById,
+  findPaginatedHotels,
+  deleteById,
+  findNearestHotels,
+};
