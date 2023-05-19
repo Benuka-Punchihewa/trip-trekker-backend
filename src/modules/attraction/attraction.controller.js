@@ -74,4 +74,29 @@ const getById = async (req, res) => {
   return res.status(StatusCodes.OK).json(dbAttraction);
 };
 
-export default { createAttraction, getPaginatedAttractions, getById };
+const getNearbyAttractions = async (req, res) => {
+  const { lat, lng, limit } = req.query;
+
+  const parsedLat = parseFloat(lat);
+  const parsedLng = parseFloat(lng);
+  const parsedLimit = parseInt(limit);
+
+  if (!parsedLng)
+    throw new BadRequestError("Longitude value is not passed or invalid!");
+  if (!parsedLat)
+    throw new BadRequestError("Latitude value is not passed or invalid!");
+
+  const result = await AttractionService.findNearestAttractions(
+    parsedLat,
+    parsedLng,
+    parsedLimit || 1
+  );
+
+  return res.status(StatusCodes.OK).json(result);
+};
+export default {
+  createAttraction,
+  getPaginatedAttractions,
+  getById,
+  getNearbyAttractions,
+};
