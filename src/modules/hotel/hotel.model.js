@@ -10,6 +10,14 @@ const HotelSchema = new mongoose.Schema(
       maxlength: [100, "Name cannot contain more than 100 characters!"],
       required: [true, "Name is required!"],
     },
+    description: {
+      type: String,
+      maxlength: [
+        10000,
+        "Description cannot contain more than 10000 characters!",
+      ],
+      required: [true, "Description is required!"],
+    },
     registrationNumber: {
       type: String,
       maxlength: [50, "Hotel name should not exceed 50 characters!"],

@@ -37,5 +37,16 @@ router.delete(
   AuthMiddleware.authorize,
   AuthMiddleware.authorizeByRoles([constants.USER_TYPES.ADMIN]),
   HotelController.deleteHotel
-)
+);
+
+// promotionImage
+router.post(
+  "/:hotelId/promotion",
+  CommonMiddleware.uploader.array("promotionImages", 10),
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([constants.USER_TYPES.ADMIN]),
+  HotelController.addPromotionImage
+);
+
+
 export default router;

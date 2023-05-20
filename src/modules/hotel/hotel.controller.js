@@ -98,33 +98,34 @@ const updateHotel = async (req, res) => {
   const updatedHotel = await HotelService.save(hotel);
 
   // upload files to firebase
-  // const promises = [];
-  // const files = req.files;
-  // for (const file of files) {
-  //   if (!file) continue;
+  const promises = [];
+  const files = req.files;
+  for (const file of files) {
+    if (!file) continue;
 
-  //   const path = HotelUtill.getFirebasePathForHotelImageUploads(
-  //     updatedHotel._id.toString()
-  //   );
+    const path = HotelUtill.getFirebasePathForHotelImageUploads(
+      updatedHotel._id.toString()
+    );
 
-  //   // upload image to firebase
-  //   promises.push(CommonService.uploadToFirebase(file, path));
+    // upload image to firebase
+    promises.push(CommonService.uploadToFirebase(file, path));
 
-  //   const firebaseFile = {
-  //     mimeType: file.mimetype,
-  //     firebaseStorageRef: path,
-  //   };
+    const firebaseFile = {
+      mimeType: file.mimetype,
+      firebaseStorageRef: path,
+    };
 
-  //   // add image to attraction doc
-  //   updatedHotel.images.push(firebaseFile);
-  // }
+    // add image to attraction doc
+    updatedHotel.images.push(firebaseFile);
+  }
 
-  // // resolve firebase upload promises
-  // await Promise.all(promises);
+  // resolve firebase upload promises
+  await Promise.all(promises);
   const savedHotel = await HotelService.save(updatedHotel);
 
   return res.status(StatusCodes.OK).json(savedHotel);
 };
+
 
 const deleteHotel = async (req, res) => {
   const { hotelId } = req.params;
@@ -142,5 +143,45 @@ const deleteHotel = async (req, res) => {
   return res.status(StatusCodes.OK).json();
 };
 
-export default { createHotel, getPaginatedHotels, getById ,updateHotel,deleteHotel};
 
+const addPromotionImage = async (req, res) => {
+  const { hotelId } = req.params;
+
+  const dbHotel = await HotelService.findById(hotelId);
+  if (!dbHotel) throw new NotFoundError("Hotel not found!");
+
+  const path = HotelUtill.getFirebaseRootPathForHotelPromotionImageUploads(hotelId);
+  await CommonService.deleteFromFirebase(path)
+
+  dbHotel.promotionImages= [];
+
+  const promises = [];
+  const files = req.files;
+  for (const file of files) {
+    if (!file) continue;
+
+    const path = HotelUtill.getFirebasePathForHotelPromotionUploads(
+      dbHotel._id.toString()
+    );
+
+    // upload image to firebase
+    promises.push(CommonService.uploadToFirebase(file, path));
+
+    const firebaseFile = {
+      mimeType: file.mimetype,
+      firebaseStorageRef: path,
+    };
+
+    // add image to hotel
+    dbHotel.promotionImages.push(firebaseFile);
+  }
+  
+  // resolve firebase upload promises
+  await Promise.all(promises);
+  const savedHotel = await HotelService.save(dbHotel);
+
+  return res.status(StatusCodes.OK).json(savedHotel); 
+};
+
+
+export default { createHotel, getPaginatedHotels, getById ,updateHotel,deleteHotel,addPromotionImage};

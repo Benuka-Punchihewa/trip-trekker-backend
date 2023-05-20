@@ -30,4 +30,16 @@ router.get(
   RatingController.getPaginatedAttractionRatings
 );
 
+router.post(
+  "/hotels/:hotelId",
+  AuthMiddleware.authorize,
+  RatingController.rateHotel
+);
+
+router.get(
+  "/hotels/:hotelId",
+  commonMiddleware.paginate,
+  AuthMiddleware.authorize,
+  RatingController.getPaginatedHotelRatings
+);
 export default router;

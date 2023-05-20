@@ -4,9 +4,11 @@ import NotFoundError from "../error/error.classes/NotFoundError.js";
 import Rating from "./rating.model.js";
 import constants from "../../constants.js";
 import RatingService from "./rating.service.js";
+import HotelService from "../hotel/hotel.service.js";
 
 const rateAttraction = async (req, res) => {
   const { attractionId } = req.params;
+  const { hotelId } = req.params;
   const { rating, review } = req.body;
   const auth = req.body.auth;
 
@@ -77,9 +79,59 @@ const getPaginatedAttractionRatings = async (req, res) => {
   return res.status(StatusCodes.OK).json(result);
 };
 
+const rateHotel = async (req, res) => {
+  const { hotelId } = req.params;
+  const { rating, review } = req.body;
+  const auth = req.body.auth;
+
+  const dbHotel = await HotelService.findById(hotelId);
+  if (!dbHotel) throw new NotFoundError("Hotel not found!");
+
+  const ratingDoc = new Rating({
+    ratee: {
+      type: constants.RATINGS.RATEES.HOTEL,
+      hotel: {
+        _id: dbHotel._id,
+      },
+    },
+    rater: {
+      user: {
+        _id: auth.user._id,
+        name: auth.user.name,
+      },
+    },
+    rating,
+    review,
+  });
+
+  const dbRating = await RatingService.save(ratingDoc);
+
+  return res.status(StatusCodes.CREATED).json(dbRating);
+};
+
+const getPaginatedHotelRatings = async (req, res) => {
+  const { hotelId } = req.params;
+  const pageable = req.body.pageable;
+
+  const dbHotel = await HotelService.findById(hotelId);
+  if (!dbHotel) throw new NotFoundError("Hotel not found!");
+
+  const result = await RatingService.findPaginatedRatings(
+    {
+      type: constants.RATINGS.RATEES.HOTEL,
+      hotelId: dbHotel._id,
+    },
+    pageable
+  );
+
+  return res.status(StatusCodes.OK).json(result);
+};
+
 export default {
   rateAttraction,
   updateRating,
   deleteRating,
   getPaginatedAttractionRatings,
+  rateHotel,
+  getPaginatedHotelRatings
 };
