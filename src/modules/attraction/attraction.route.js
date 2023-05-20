@@ -22,4 +22,6 @@ router.get(
 
 router.get("/:attractionId", AttractionController.getById);
 
+router.get("/nearest/locations", AttractionController.getNearbyAttractions);
+
 export default router;

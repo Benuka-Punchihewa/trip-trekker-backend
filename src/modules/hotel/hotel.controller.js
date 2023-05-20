@@ -1,9 +1,9 @@
 import { StatusCodes } from "http-status-codes";
 import BadRequestError from "../error/error.classes/BadRequestError.js";
-import HotelService from './hotel.service.js';
+import HotelService from "./hotel.service.js";
 import Hotel from "./hotel.model.js";
 import CommonService from "../common/common.service.js";
-import HotelUtill from './hotel.util.js';
+import HotelUtill from "./hotel.util.js";
 import NotFoundError from "../error/error.classes/NotFoundError.js";
 
 const createHotel = async (req, res) => {
@@ -57,10 +57,7 @@ const getPaginatedHotels = async (req, res) => {
   const pageable = req.body.pageable;
   const { keyword } = req.query;
 
-  const result = await HotelService.findPaginatedHotels(
-    keyword,
-    pageable
-  );
+  const result = await HotelService.findPaginatedHotels(keyword, pageable);
 
   return res.status(StatusCodes.OK).json(result);
 };
@@ -138,8 +135,8 @@ const deleteHotel = async (req, res) => {
   await HotelService.deleteById(hotelId);
 
   const path = HotelUtill.getFirebaseRootPathForHotelImageUploads(hotelId);
-  await CommonService.deleteFromFirebase(path)
- 
+  await CommonService.deleteFromFirebase(path);
+
   return res.status(StatusCodes.OK).json();
 };
 
@@ -183,5 +180,33 @@ const addPromotionImage = async (req, res) => {
   return res.status(StatusCodes.OK).json(savedHotel); 
 };
 
+const getNearbyHotels = async (req, res) => {
+  const { lat, lng, limit } = req.query;
 
-export default { createHotel, getPaginatedHotels, getById ,updateHotel,deleteHotel,addPromotionImage};
+  const parsedLat = parseFloat(lat);
+  const parsedLng = parseFloat(lng);
+  const parsedLimit = parseInt(limit);
+
+  if (!parsedLng)
+    throw new BadRequestError("Longitude value is not passed or invalid!");
+  if (!parsedLat)
+    throw new BadRequestError("Latitude value is not passed or invalid!");
+
+  const result = await HotelService.findNearestHotels(
+    parsedLat,
+    parsedLng,
+    parsedLimit || 1
+  );
+
+  return res.status(StatusCodes.OK).json(result);
+};
+
+export default {
+  createHotel,
+  getPaginatedHotels,
+  getById,
+  updateHotel,
+  deleteHotel,
+  addPromotionImage,
+  getNearbyHotels,
+};

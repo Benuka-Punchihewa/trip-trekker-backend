@@ -13,6 +13,7 @@ const AttractionSchema = new mongoose.Schema(
     location: {
       type: GeoJsonSchema,
       required: [true, "Location is required!"],
+      index: { type: "2dsphere", sparse: false },
     },
     description: {
       type: String,

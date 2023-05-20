@@ -14,11 +14,7 @@ router.post(
   HotelController.createHotel
 );
 
-router.get(
-  "/",
-  CommonMiddleware.paginate,
-  HotelController.getPaginatedHotels
-);
+router.get("/", CommonMiddleware.paginate, HotelController.getPaginatedHotels);
 router.get("/:hotelId", HotelController.getById);
 
 //Update Hotel
@@ -48,5 +44,7 @@ router.post(
   HotelController.addPromotionImage
 );
 
+// get nearest hotels
+router.get("/nearest/locations", HotelController.getNearbyHotels);
 
 export default router;
