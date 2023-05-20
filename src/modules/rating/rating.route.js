@@ -30,6 +30,18 @@ router.get(
 );
 
 router.post(
+  "/users/:userId",
+  AuthMiddleware.authorize,
+  RatingController.rateTourGuide
+);
+
+router.get(
+  "/users/:userId",
+  commonMiddleware.paginate,
+  RatingController.getPaginatedTourGuideRatings
+);
+
+router.post(
   "/hotels/:hotelId",
   AuthMiddleware.authorize,
   RatingController.rateHotel
