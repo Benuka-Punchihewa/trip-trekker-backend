@@ -24,7 +24,7 @@ describe("Hotel Module Tests", () => {
         .set("Content-type", "multipart/form-data")
         .field(
           "strigifiedBody",
-          `{"name":"Maya Hotel","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
+          `{"name":"Maya Hotel","description":"this is description","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
         )
         .attach("files", "./src/testAttachments/img1.jpg", {
           contentType: "image/jpg",
@@ -48,7 +48,7 @@ describe("Hotel Module Tests", () => {
         .set("Authorization", `Bearer ${token}`)
         .field(
           "strigifiedBody",
-          `{"name":"Maya Hotel","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
+          `{"name":"Maya Hotel","description":"this is description","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
         )
         .attach("files", "./src/testAttachments/img1.jpg", {
           contentType: "image/jpg",
@@ -93,7 +93,7 @@ describe("Hotel Module Tests", () => {
         .set("Authorization", `Bearer ${token}`)
         .field(
           "strigifiedBody",
-          `{"name":"Maya Hotel","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
+          `{"name":"Maya Hotel","description":"this is description","description":"this is description","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
         )
         .attach("files", "./src/testAttachments/img1.jpg", {
           contentType: "image/jpg",
@@ -158,7 +158,7 @@ describe("Hotel Module Tests", () => {
         .set("Content-type", "multipart/form-data")
         .field(
           "strigifiedBody",
-          `{"name":"Updated Maya Hotel","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
+          `{"name":"Updated Maya Hotel","description":"this is description","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
         )
         .attach("files", "./src/testAttachments/img2.jpg", {
           contentType: "image/jpg",
@@ -179,7 +179,7 @@ describe("Hotel Module Tests", () => {
         .set("Content-type", "multipart/form-data")
         .field(
           "strigifiedBody",
-          `{"name":"Updated Maya Hotel","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
+          `{"name":"Updated Maya Hotel","description":"this is description","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
         )
         .attach("files", "./src/testAttachments/img2.jpg", {
           contentType: "image/jpg",
@@ -200,7 +200,7 @@ describe("Hotel Module Tests", () => {
         .set("Content-type", "multipart/form-data")
         .field(
           "strigifiedBody",
-          `{"name":"Updated Maya Hotel","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
+          `{"name":"Updated Maya Hotel","description":"this is description","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
         )
         .attach("files", "./src/testAttachments/img2.jpg", {
           contentType: "image/jpg",
@@ -239,7 +239,7 @@ describe("Hotel Module Tests", () => {
         .set("Content-type", "multipart/form-data")
         .field(
           "strigifiedBody",
-          `{"name":"Updated Maya Hotel","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
+          `{"name":"Updated Maya Hotel","description":"this is description","registrationNumber":"MA-10KA","address":"No 2 Main St,New Town,Kandy","contactNumber":"057 6525412","email":"MayaView@gmail.com","openHours":{"open":"2023-07-06T09:00:00Z","close":"2023-07-06T18:00:00Z"},"hotelFacilities":["Pool","Spa","Gym"],"location":{"type":"Point","coordinates":[80.636696, 7.291418]}}`
         )
         .attach("files", "./src/testAttachments/img2.jpg", {
           contentType: "image/jpg",

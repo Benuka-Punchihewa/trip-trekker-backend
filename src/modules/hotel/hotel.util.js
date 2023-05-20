@@ -8,4 +8,14 @@ const getFirebasePathForHotelImageUploads = (hotelId) => {
 const getFirebaseRootPathForHotelImageUploads = (hotelId) => {
   return `hotels/${hotelId}`;
 }; 
-export default { getFirebasePathForHotelImageUploads,getFirebaseRootPathForHotelImageUploads };
+
+const getFirebasePathForHotelPromotionUploads = (hotelId) => {
+  const imageId = uuidv4();
+  return `hotels/${hotelId}/promotions/${imageId}`;
+};
+
+const getFirebaseRootPathForHotelPromotionImageUploads = (hotelId) => {
+  return `hotels/${hotelId}/promotions`;
+}; 
+
+export default { getFirebasePathForHotelImageUploads,getFirebaseRootPathForHotelImageUploads,getFirebasePathForHotelPromotionUploads,getFirebaseRootPathForHotelPromotionImageUploads };
