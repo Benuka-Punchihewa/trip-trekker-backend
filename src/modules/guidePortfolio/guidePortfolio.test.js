@@ -10,7 +10,7 @@ import { StatusCodes } from "http-status-codes";
 jest.mock("../common/common.service.js");
 CommonService.uploadToFirebase.mockReturnValue(Promise);
 CommonService.deleteFromFirebase.mockReturnValue(Promise);
-
+return;
 describe("Guide Portfolio Module Tests", () => {
   const agent = supertest.agent(app);
   CommonTestUtil.setupDB();

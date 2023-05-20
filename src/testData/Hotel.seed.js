@@ -4,6 +4,7 @@ const hotel = [
     {
         _id: new mongoose.Types.ObjectId("6457434fa2be2a4221afda42"),
         name: "Kandy View Hotel",
+        description:"Test description",
         registrationNumber: "KA-10KA",
         address: "No 2 Main St,Kandy",
         contactNumber: "055 6525412",
