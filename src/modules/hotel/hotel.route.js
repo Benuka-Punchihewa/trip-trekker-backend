@@ -35,6 +35,15 @@ router.delete(
   HotelController.deleteHotel
 );
 
+// promotionImage
+router.post(
+  "/:hotelId/promotion",
+  CommonMiddleware.uploader.array("promotionImages", 10),
+  AuthMiddleware.authorize,
+  AuthMiddleware.authorizeByRoles([constants.USER_TYPES.ADMIN]),
+  HotelController.addPromotionImage
+);
+
 // get nearest hotels
 router.get("/nearest/locations", HotelController.getNearbyHotels);
 

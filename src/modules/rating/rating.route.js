@@ -26,7 +26,6 @@ router.delete(
 router.get(
   "/attractions/:attractionId",
   commonMiddleware.paginate,
-  AuthMiddleware.authorize,
   RatingController.getPaginatedAttractionRatings
 );
 
@@ -42,4 +41,15 @@ router.get(
   RatingController.getPaginatedTourGuideRatings
 );
 
+router.post(
+  "/hotels/:hotelId",
+  AuthMiddleware.authorize,
+  RatingController.rateHotel
+);
+
+router.get(
+  "/hotels/:hotelId",
+  commonMiddleware.paginate,
+  RatingController.getPaginatedHotelRatings
+);
 export default router;
