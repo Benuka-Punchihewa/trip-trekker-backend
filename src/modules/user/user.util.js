@@ -2,4 +2,11 @@ const getFirebasePathForCertificateUploads = (userId) => {
   return `users/${userId}/certificate`;
 };
 
-export default { getFirebasePathForCertificateUploads };
+const getFirebasePathForProfileImageUploads = (userId) => {
+  return `users/${userId}/profile-image`;
+};
+
+export default {
+  getFirebasePathForCertificateUploads,
+  getFirebasePathForProfileImageUploads,
+};

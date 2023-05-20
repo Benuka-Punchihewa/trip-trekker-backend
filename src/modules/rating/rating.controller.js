@@ -4,6 +4,7 @@ import NotFoundError from "../error/error.classes/NotFoundError.js";
 import Rating from "./rating.model.js";
 import constants from "../../constants.js";
 import RatingService from "./rating.service.js";
+import userService from "../user/user.service.js";
 
 const rateAttraction = async (req, res) => {
   const { attractionId } = req.params;
@@ -77,9 +78,61 @@ const getPaginatedAttractionRatings = async (req, res) => {
   return res.status(StatusCodes.OK).json(result);
 };
 
+const rateTourGuide = async (req, res) => {
+  const { userId } = req.params;
+  const { rating, review } = req.body;
+  const auth = req.body.auth;
+
+  console.log("userId ", userId);
+
+  const dbUser = await userService.findById(userId);
+  if (!dbUser) throw new NotFoundError("User not found!");
+
+  const ratingDoc = new Rating({
+    ratee: {
+      type: constants.RATINGS.RATEES.TOUR_GUIDE,
+      attraction: {
+        _id: dbUser._id,
+      },
+    },
+    rater: {
+      user: {
+        _id: auth.user._id,
+        name: auth.user.name,
+      },
+    },
+    rating,
+    review,
+  });
+
+  const dbRating = await RatingService.save(ratingDoc);
+
+  return res.status(StatusCodes.CREATED).json(dbRating);
+};
+
+const getPaginatedTourGuideRatings = async (req, res) => {
+  const { userId } = req.params;
+  const pageable = req.body.pageable;
+
+  const dbUser = await userService.findById(userId);
+  if (!dbUser) throw new NotFoundError("User not found!");
+
+  const result = await RatingService.findPaginatedRatings(
+    {
+      type: constants.RATINGS.RATEES.TOUR_GUIDE,
+      tourGuideId: dbUser._id,
+    },
+    pageable
+  );
+
+  return res.status(StatusCodes.OK).json(result);
+};
+
 export default {
   rateAttraction,
   updateRating,
   deleteRating,
   getPaginatedAttractionRatings,
+  rateTourGuide,
+  getPaginatedTourGuideRatings,
 };

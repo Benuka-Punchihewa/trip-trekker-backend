@@ -30,4 +30,16 @@ router.get(
   RatingController.getPaginatedAttractionRatings
 );
 
+router.post(
+  "/users/:userId",
+  AuthMiddleware.authorize,
+  RatingController.rateTourGuide
+);
+
+router.get(
+  "/users/:userId",
+  commonMiddleware.paginate,
+  RatingController.getPaginatedTourGuideRatings
+);
+
 export default router;

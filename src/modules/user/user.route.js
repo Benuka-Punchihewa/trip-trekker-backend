@@ -29,4 +29,11 @@ router.patch(
   userController.updateUserIsVerified
 );
 
+router.patch(
+  "/:userId/profile-image",
+  CommonMiddleware.uploader.single("profileImg"),
+  AuthMiddleware.authorize,
+  userController.updateProfileImage
+);
+
 export default router;
